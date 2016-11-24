@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="First test suite" parallel="methods">
+    <test name="First API Test">
+        <classes>
+            <class name="API"/>
+        </classes>
+    </test>
+</suite>
