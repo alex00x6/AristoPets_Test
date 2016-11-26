@@ -3,9 +3,12 @@ package ui.utils;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -28,13 +31,23 @@ public class DriverConfigurator {
                 capability.setBrowserName("firefox");
                 capability.setPlatform(Platform.LINUX);
             }
-            if (browserName.toLowerCase().contains("internet")) {
+            if (browserName.toLowerCase().contains("internetExplorer")) {
                 capability = DesiredCapabilities.internetExplorer();
+                capability.setBrowserName("internetExplorer");
             }
             if (browserName.toLowerCase().contains("chrome")) {
                 capability = DesiredCapabilities.chrome();
                 capability.setBrowserName("chrome");
                 capability.setPlatform(Platform.LINUX);
+            }
+            if (browserName.toLowerCase().contains("safari")){
+                capability = DesiredCapabilities.safari();
+                capability.setBrowserName("safari");
+                capability.setPlatform(Platform.LINUX);
+            }
+            if (browserName.toLowerCase().contains("edge")){
+                capability = DesiredCapabilities.edge();
+                capability.setBrowserName("edge");
             }
             driver = new RemoteWebDriver(hostURL, capability);
         }
@@ -44,14 +57,22 @@ public class DriverConfigurator {
                 System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
             }
             if (browserName.toLowerCase().contains("internet")) {
-                System.out.println("OOOOOPS! Not configured yet");
+                driver = new InternetExplorerDriver();
+                System.setProperty("webdriver.ie.driver", "IEDriverServer.exe");
             }
             if (browserName.toLowerCase().contains("chrome")) {
                 driver = new ChromeDriver();
                 System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
             }
+            if (browserName.toLowerCase().contains("safari")){
+                driver = new SafariDriver();
+                System.setProperty("webdriver.safari.driver", "safari.exe");
+            }
+            if (browserName.toLowerCase().contains("edge")){
+                driver = new EdgeDriver();
+                System.setProperty("webdriver.edge.driver", "edge.exe");
+            }
         }
-
 
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         driver.manage().window().maximize();
