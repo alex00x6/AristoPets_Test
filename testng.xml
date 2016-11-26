@@ -5,4 +5,17 @@
             <class name="API"/>
         </classes>
     </test>
+    <test name="First UI Test">
+        <parameter name="seleniumGridIp" value="http://127.0.0.1:4444/wd/hub"/>
+        <parameter name="useGrid" value="false"/>
+        <parameter name="browserName" value="chrome"/>
+        <classes>
+            <class name="UI"/>
+        </classes>
+    </test>
+    <test name="First DB Test">
+        <classes>
+            <class name="DB"/>
+        </classes>
+    </test>
 </suite>
