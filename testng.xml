@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="First test suite" parallel="methods">
+<suite name="First test suite" parallel="tests">
     <test name="First API Test">
         <classes>
             <class name="API"/>

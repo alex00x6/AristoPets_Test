@@ -53,24 +53,24 @@ public class DriverConfigurator {
         }
         else{
             if (browserName.toLowerCase().contains("firefox")) {
-               driver = new FirefoxDriver();
                 System.setProperty("webdriver.gecko.driver", "main/resources/geckodriver32.exe");
+               driver = new FirefoxDriver();
             }
             if (browserName.toLowerCase().contains("internet")) {
-                driver = new InternetExplorerDriver();
                 System.setProperty("webdriver.ie.driver", "main/resources/IEDriverServer32.exe");
+                driver = new InternetExplorerDriver();
             }
             if (browserName.toLowerCase().contains("chrome")) {
-                driver = new ChromeDriver();
                 System.setProperty("webdriver.chrome.driver", "main/resources/chromedriver.exe");
+                driver = new ChromeDriver();
             }
             if (browserName.toLowerCase().contains("safari")){
-                driver = new SafariDriver();
                 System.setProperty("webdriver.safari.driver", "safari.exe");
+                driver = new SafariDriver();
             }
             if (browserName.toLowerCase().contains("edge")){
-                driver = new EdgeDriver();
                 System.setProperty("webdriver.edge.driver", "main/resources/MicrosoftWebDriver.exe");
+                driver = new EdgeDriver();
             }
         }
 
