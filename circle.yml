@@ -3,6 +3,7 @@ general:
     - "target"
     
 deployment:
+    staging:
         branch: master
         commands:
         - ./deploy_prod.sh
