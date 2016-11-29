@@ -1,0 +1,8 @@
+general:
+  artifacts:
+    - "target"
+deployment:
+    production:
+    branch:master
+    commands:
+        - ./deploy_prod.sh
