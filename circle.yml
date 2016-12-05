@@ -3,7 +3,11 @@ general:
     - "target"
     
 deployment:
-    staging:
+    master:
         branch: master
         commands:
-        - ./deploy_prod.sh
+        - sh ./deploy_master.sh
+    test:
+        branch: \b(?!master\b)\w+
+        commands:
+        - sh ./deploy_test.sh
