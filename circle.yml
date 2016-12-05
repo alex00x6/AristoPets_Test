@@ -8,6 +8,6 @@ deployment:
         commands:
         - sh ./deploy_master.sh
     test:
-        branch: \b(?!master\b)\w+
+        branch: /\b(?!master\b)\w+/
         commands:
         - sh ./deploy_test.sh
