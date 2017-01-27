@@ -13,9 +13,4 @@
             <class name="UI"/>
         </classes>
     </test>
-    <test name="First DB Test">
-        <classes>
-            <class name="DB"/>
-        </classes>
-    </test>
 </suite>
