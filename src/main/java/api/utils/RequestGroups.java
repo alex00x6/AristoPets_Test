@@ -61,4 +61,63 @@ public class RequestGroups{
         return requestSender;
     }
 
+    public RequestSender postAnimal(String body){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createRequestAuth(body).post(ApiUrls.ANIMAL.getUri(""));
+        return requestSender;
+    }
+
+    public RequestSender putAnimal(String id, String body){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createRequestAuth(body).put(ApiUrls.ANIMAL.getUri(id));
+        return requestSender;
+    }
+
+    public RequestSender getAnimal(){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().get(ApiUrls.ANIMAL.getUri(""));
+        return requestSender;
+    }
+
+    public RequestSender getAnimal(String id){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().put(ApiUrls.ANIMAL.getUri(id));
+        return requestSender;
+    }
+
+    public RequestSender deleteAnimal(String id){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().delete(ApiUrls.ANIMAL.getUri(id));
+        return requestSender;
+    }
+
+    public RequestSender getAdvert(){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().get(ApiUrls.ADVERT.getUri(""));
+        return requestSender;
+    }
+
+    public RequestSender getAdvert(String id){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().get(ApiUrls.ADVERT.getUri(id));
+        return requestSender;
+    }
+
+    public RequestSender postAdvert(String body){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createRequestAuth(body).post(ApiUrls.ADVERT.getUri());
+        return requestSender;
+    }
+
+    public RequestSender putAdvert(String id, String body){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createRequestAuth(body).put(ApiUrls.ADVERT.getUri(id));
+        return requestSender;
+    }
+
+    public RequestSender deleteAdvert(String id){
+        RequestSender requestSender = new RequestSender();
+        requestSender.createEmptyRequestAuth().delete(ApiUrls.ADVERT.getUri(id));
+        return requestSender;
+    }
 }
