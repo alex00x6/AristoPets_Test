@@ -1,11 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="First test suite" parallel="false">
-    <test name="First UI Test">
-        <parameter name="seleniumGridIp" value="http://127.0.0.1:4444/wd/hub"/>
-        <parameter name="useGrid" value="false"/>
-        <parameter name="browserName" value="chrome"/>
+    <test name="First API Test">
         <classes>
-            <class name="UI"/>
+            <class name="API"/>
         </classes>
     </test>
 </suite>

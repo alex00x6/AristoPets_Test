@@ -170,6 +170,39 @@ public class API {
 
         Assert.assertTrue(response.statusCode()==200);
         Assert.assertTrue(response.asString().contains("amazonaws"));
+        Assert.assertTrue(response.asString().contains("apuserphoto"));
+    }
+
+    @Test
+    public void postPhotoAdvert(){
+        String body = photoBody();
+
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.postPhotoAdvert(body).getResponse();
+        System.out.println("Response: =>");
+        System.out.println(response.asString());
+        System.out.println(response.statusCode());
+
+
+        Assert.assertTrue(response.statusCode()==200);
+        Assert.assertTrue(response.asString().contains("amazonaws"));
+        Assert.assertTrue(response.asString().contains("apadvertphoto"));
+    }
+
+    @Test
+    public void postPhotoAnimal(){
+        String body = photoBody();
+
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.postPhotoAnimal(body).getResponse();
+        System.out.println("Response: =>");
+        System.out.println(response.asString());
+        System.out.println(response.statusCode());
+
+
+        Assert.assertTrue(response.statusCode()==200);
+        Assert.assertTrue(response.asString().contains("amazonaws"));
+        Assert.assertTrue(response.asString().contains("apanimalphoto"));
     }
 
     @Test
@@ -187,6 +220,7 @@ public class API {
         requestGroups.putUser(newBody);
 
         String response2 = requestGroups.getUser().getResponse().asString();
+        System.out.println(response2);
 
         Assert.assertTrue(!response1.equals(response2));
 
