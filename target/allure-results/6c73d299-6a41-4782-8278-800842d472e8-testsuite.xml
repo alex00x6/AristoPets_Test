@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:test-suite start="1485527703469" stop="1485527706217" xmlns:ns2="urn:model.allure.qatools.yandex.ru">
+    <name>Default Suite : APTests</name>
+    <title>Default Suite : APTests</title>
+    <test-cases>
+        <test-case start="1485527705906" stop="1485527706213" status="passed">
+            <name>updateUser</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="Storm-pc"/>
+                <label name="thread" value="10640@Storm-pc.main(1)"/>
+            </labels>
+        </test-case>
+    </test-cases>
+    <labels>
+        <label name="framework" value="TestNG"/>
+        <label name="language" value="JAVA"/>
+    </labels>
+</ns2:test-suite>

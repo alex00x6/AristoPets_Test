@@ -1,5 +1,8 @@
 package api.utils;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.security.SecureRandom;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
@@ -35,4 +38,12 @@ public class Helpers {
         return ThreadLocalRandom.current().nextLong(min, min * 10);
     }
 
+
+    public String jsonChangeValue(String jsonString, String key, String newValue){
+        JsonObject object = (JsonObject) new JsonParser().parse(jsonString);
+        object.remove(key);
+        object.addProperty(key, newValue);
+
+        return object.toString();
+    }
 }
