@@ -5,7 +5,7 @@ public class TestUserDto{
     private String firstName;
     private String lastName;
     private String email;
-    private long id;
+    private String id;
     private String userType;
     private String nursery;
     private String authType;
@@ -17,6 +17,8 @@ public class TestUserDto{
     private boolean contractOfSale;
   //  private List<String> animals;
    // private List<String> adverts;
+
+
 
     @Override
     public String toString() {
@@ -37,9 +39,9 @@ public class TestUserDto{
                 '}';
     }
 
-    public long getId() { return id; }
+    public String getId() { return id; }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

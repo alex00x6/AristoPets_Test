@@ -27,7 +27,7 @@ public class API {
                 "  \"firstName\": \"василий\",\n" +
                 "  \"lastName\": \"куропаточкин\",\n" +
                 "  \"email\": \"geloks@bk.ru\",\n" +
-                "  \"id\": 27,\n" +
+                "  \"id\": 23,\n" +
                 "  \"userType\": \"USER\",\n" +
                 "  \"nursery\": null,\n" +
                 "  \"authType\": \"EMAIL\",\n" +
@@ -264,61 +264,112 @@ public class API {
 
     }
 
-
-    //TODO: отсюда и дальше
-
-
-
-
     @Test
     public void updateAnimal(){
         RequestGroups requestGroups = new RequestGroups();
         JsonGenerator jsonGenerator = new JsonGenerator();
         Helpers helpers = new Helpers();
 
-        String name = helpers.randomString();
-        String club = helpers.randomString();
-        String nursery = helpers.randomString();
-        String moreInfo = helpers.randomString();
         String createBody = jsonGenerator.generateJsonAnimal();
 
         Response response = requestGroups.postAnimal(createBody).getResponse();
         String id = response.jsonPath().get("id").toString();
         String json = response.asString();
+        System.out.println(json);
 
         Map<String, String> map = new HashMap<>();
-        map.put("name", name);
-        map.put("club", club);
-        map.put("nursery", nursery);
-        map.put("moreInfo", moreInfo);
+        map.put("name", helpers.randomString());
+        map.put("club", helpers.randomString());
+        map.put("nursery", helpers.randomString());
+        map.put("moreInfo", helpers.randomString());
 
-        String newBody = helpers.jsonChangeValues(json, map);
+        String newBody = helpers.jsonChangeValues(createBody, map);
 
+        Response response1 = requestGroups.putAnimal(id, newBody).getResponse();
+        System.out.println(response1.asString());
+        Assert.assertTrue(response1.statusCode()==200);
+        helpers.assertContains(response1.asString(), map);
 
-        String body1 = jsonGenerator.generateJsonAnimal();
-
-        //Response response1 = requestGroups.putAnimal(id, body).getResponse();
-        System.out.println(response.asString());
+        Response response3 = requestGroups.deleteAnimal(id).getResponse();
+        Assert.assertTrue(response3.statusCode()==200);
     }
+
+
+
+    //TODO: отсюда и дальше
+
 
     @Test
     public void getAnimal(){
         RequestGroups requestGroups = new RequestGroups();
-        String response = requestGroups.getAnimal().getResponse().asString();
-        System.out.println(response);
+        Response response = requestGroups.getAnimals().getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.asString());
     }
 
     @Test
     public void getAnimalById(){
         RequestGroups requestGroups = new RequestGroups();
-        String response = requestGroups.getAnimal("31").getResponse().asString();
-        System.out.println(response);
+        Response response = requestGroups.getAnimals("31").getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.asString());
     }
 
     @Test
     public void deleteAnimalById(){
         RequestGroups requestGroups = new RequestGroups();
         Response response = requestGroups.deleteAnimal("31").getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void getAdverts(){
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.getAdverts().getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+
+    }
+
+    @Test
+    public void getAdvertbyId(){
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.getAdvert("31").getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void postAdvert(){
+        RequestGroups requestGroups = new RequestGroups();
+        String body = "";
+
+        Response response = requestGroups.postAdvert(body).getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void updateAdvert(){
+        RequestGroups requestGroups = new RequestGroups();
+        String body = "";
+
+        Response response = requestGroups.putAdvert("31", body).getResponse();
+        Assert.assertTrue(response.statusCode()==200);
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void deleteAdvert(){
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.deleteAdvert("31").getResponse();
+        Assert.assertTrue(response.statusCode()==200);
         System.out.println(response.statusCode());
         System.out.println(response.asString());
     }

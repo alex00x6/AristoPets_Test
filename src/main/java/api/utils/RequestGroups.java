@@ -73,13 +73,13 @@ public class RequestGroups{
         return requestSender;
     }
 
-    public RequestSender getAnimal(){
+    public RequestSender getAnimals(){
         RequestSender requestSender = new RequestSender();
         requestSender.createEmptyRequestAuth().get(ApiUrls.ANIMAL.getUri(""));
         return requestSender;
     }
 
-    public RequestSender getAnimal(String id){
+    public RequestSender getAnimals(String id){
         RequestSender requestSender = new RequestSender();
         requestSender.createEmptyRequestAuth().get(ApiUrls.ANIMAL.getUri(id));
         return requestSender;
@@ -91,7 +91,7 @@ public class RequestGroups{
         return requestSender;
     }
 
-    public RequestSender getAdvert(){
+    public RequestSender getAdverts(){
         RequestSender requestSender = new RequestSender();
         requestSender.createEmptyRequestAuth().get(ApiUrls.ADVERT.getUri(""));
         return requestSender;

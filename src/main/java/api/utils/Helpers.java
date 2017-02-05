@@ -2,6 +2,7 @@ package api.utils;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.junit.Assert;
 
 import java.security.SecureRandom;
 import java.util.Map;
@@ -56,5 +57,14 @@ public class Helpers {
             object.addProperty(key, value);
         }
         return object.toString();
+    }
+
+    public void assertContains(String text, Map<String, String> map){
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            Assert.assertTrue(text.contains(key));
+            Assert.assertTrue(text.contains(value));
+        }
     }
 }
