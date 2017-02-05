@@ -81,7 +81,7 @@ public class RequestGroups{
 
     public RequestSender getAnimal(String id){
         RequestSender requestSender = new RequestSender();
-        requestSender.createEmptyRequestAuth().put(ApiUrls.ANIMAL.getUri(id));
+        requestSender.createEmptyRequestAuth().get(ApiUrls.ANIMAL.getUri(id));
         return requestSender;
     }
 

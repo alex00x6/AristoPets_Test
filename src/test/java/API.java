@@ -8,6 +8,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 @Listeners(TestListener.class)
 public class API {
 
@@ -207,23 +211,116 @@ public class API {
 
     @Test
     public void updateUserPhoto(){
-        String body = photoJson();
+        String body = photoJson(); //готовим json с картинкой в base 64
 
         RequestGroups requestGroups = new RequestGroups();
         Helpers helpers = new Helpers();
-        String response1 = requestGroups.getUser().getResponse().asString();
+        String response1 = requestGroups.getUser().getResponse().asString();//получаем json о user'e с сервера
 
-        String photoUrl = requestGroups.postPhotoUser(body).getResponse().asString();
+        String photoUrl = requestGroups.postPhotoUser(body).getResponse().asString(); //постим фото в aws
 
-        String newBody = helpers.jsonChangeValue(response1, "photo", photoUrl);
+        String newBody = helpers.jsonChangeValue(response1, "photo", photoUrl); //берем json user'a, и меняем в нем линк
 
-        requestGroups.putUser(newBody);
+        requestGroups.putUser(newBody);//отправляем новый json на сервер
 
-        String response2 = requestGroups.getUser().getResponse().asString();
+        String response2 = requestGroups.getUser().getResponse().asString();//забираем с сервера инфо о user'e
         System.out.println(response2);
 
-        Assert.assertTrue(!response1.equals(response2));
+        Assert.assertTrue(!response1.equals(response2));//проверяем, отличается ли инфа сейчас от инфы, полученной ранее
+        Assert.assertTrue(response2.contains(photoUrl));//проверяем, есть ли в ответе от сервера url с нашей картинкой
+    }
 
+    @Test
+    public void addAnimal(){
+        RequestGroups requestGroups = new RequestGroups();
+        JsonGenerator jsonGenerator = new JsonGenerator();
+
+        String body = jsonGenerator.generateJsonAnimal();
+
+        Response response = requestGroups.postAnimal(body).getResponse();
+
+        Assert.assertTrue(response.asString().contains("id"));
+        Assert.assertTrue(response.asString().contains("name"));
+        Assert.assertTrue(response.asString().contains("gender"));
+        Assert.assertTrue(response.asString().contains("color"));
+        Assert.assertTrue(response.asString().contains("club"));
+        Assert.assertTrue(response.asString().contains("birthday"));
+        Assert.assertTrue(response.asString().contains("nursery"));
+        Assert.assertTrue(response.asString().contains("moreInfo"));
+        Assert.assertTrue(response.asString().contains("breed"));
+        Assert.assertTrue(response.asString().contains("readyToCopulation"));
+        Assert.assertTrue(response.asString().contains("userId"));
+        Assert.assertTrue(response.asString().contains("photos"));
+        Assert.assertTrue(response.asString().contains("titles"));
+
+
+        String id = response.jsonPath().get("id").toString();
+        System.out.println("ID ====>>>"+ id);
+        System.out.println(response.asString());
+
+        Response response2 = requestGroups.deleteAnimal(id).getResponse();
+        Assert.assertTrue(response2.statusCode()==200);
+        System.out.println("ID ====>>>"+ id + " DELETED");
+
+    }
+
+
+    //TODO: отсюда и дальше
+
+
+
+
+    @Test
+    public void updateAnimal(){
+        RequestGroups requestGroups = new RequestGroups();
+        JsonGenerator jsonGenerator = new JsonGenerator();
+        Helpers helpers = new Helpers();
+
+        String name = helpers.randomString();
+        String club = helpers.randomString();
+        String nursery = helpers.randomString();
+        String moreInfo = helpers.randomString();
+        String createBody = jsonGenerator.generateJsonAnimal();
+
+        Response response = requestGroups.postAnimal(createBody).getResponse();
+        String id = response.jsonPath().get("id").toString();
+        String json = response.asString();
+
+        Map<String, String> map = new HashMap<>();
+        map.put("name", name);
+        map.put("club", club);
+        map.put("nursery", nursery);
+        map.put("moreInfo", moreInfo);
+
+        String newBody = helpers.jsonChangeValues(json, map);
+
+
+        String body1 = jsonGenerator.generateJsonAnimal();
+
+        //Response response1 = requestGroups.putAnimal(id, body).getResponse();
+        System.out.println(response.asString());
+    }
+
+    @Test
+    public void getAnimal(){
+        RequestGroups requestGroups = new RequestGroups();
+        String response = requestGroups.getAnimal().getResponse().asString();
+        System.out.println(response);
+    }
+
+    @Test
+    public void getAnimalById(){
+        RequestGroups requestGroups = new RequestGroups();
+        String response = requestGroups.getAnimal("31").getResponse().asString();
+        System.out.println(response);
+    }
+
+    @Test
+    public void deleteAnimalById(){
+        RequestGroups requestGroups = new RequestGroups();
+        Response response = requestGroups.deleteAnimal("31").getResponse();
+        System.out.println(response.statusCode());
+        System.out.println(response.asString());
     }
 
 

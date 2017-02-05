@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.security.SecureRandom;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,19 @@ public class Helpers {
         JsonObject object = (JsonObject) new JsonParser().parse(jsonString);
         object.remove(key);
         object.addProperty(key, newValue);
+        return object.toString();
+    }
 
+    public String jsonChangeValues(String jsonString, Map<String, String> map){
+        JsonObject object = (JsonObject) new JsonParser().parse(jsonString);
+
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            object.remove(key);
+            object.addProperty(key, value);
+        }
         return object.toString();
     }
 }

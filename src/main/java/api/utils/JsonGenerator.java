@@ -41,4 +41,40 @@ public class JsonGenerator {
     }
 
 
+    /*
+    {
+	"name": "Brunhilda",
+	"gender": "FEMALE",
+	"color": "White-red",
+	"birthday": "2015-01-01",
+	"club": "KSU",
+	"nursery": "FRANCUZSKOE VELIKOLEPIE",
+	"moreInfo": "Cute Dog",
+	"breedId": 1,
+	"readyToCopulation": false,
+	"userId": 1,
+	"photos": ["https://apadvertphoto.s3.eu-central-1.amazonaws.com/d0854045-fd86-4aed-88b6-3afd1001ed3a"],
+	"titles": ["Mark:Excellent", "YOU"]
+}
+     */
+
+    public String generateJsonAnimal(){
+        String jsonObject = new JSONObject()
+                .put("name", "DaniilTheCoder")
+                .put("gender", "none")
+                .put("color", "white")
+                .put("birthday", "2016-01-02")//без этой штуки error 500 nullpointerexception
+                .put("club", "Hillel")
+                .put("nursery", "Hillelskoe Velikolepie")
+                .put("moreInfo", "great pet")
+                .put("breedId", 1)//int
+//                .put("readyToCopulation", "false")//boolean
+//                .put("userId", "1")//int
+ //               .put("photos", "photos")//array here
+//                .put("titles", "titles")//array here
+                .toString();
+        return jsonObject;
+    }
+
+
 }
